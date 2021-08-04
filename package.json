@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "@demo/hello-world",
+  "version": "1.0.2",
+  "main": "index.js",
+  "files": [],
+  "scripts": {
+    "publish:pack": "npm pack --pack-destination dist",
+    "publish:upload": "node scripts/publish.js",
+    "publish": "npm run publish:pack && npm run publish:upload"
+  },
+  "devDependencies": {
+    "dashify": "^2.0.0",
+    "node-fetch": "^2.6.1"
+  }
+}
