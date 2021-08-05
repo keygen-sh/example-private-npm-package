@@ -39,11 +39,29 @@ using the `version` set in `package.json`:
 ## Using the registry
 
 To use Keygen as a private npm registry, we'll need to configure npm to retrieve modules
-under the `@demo` scope from Keygen:
+under the `@demo` scope from Keygen: (note double quotes)
 
 ```bash
 npm config set @demo:registry "https://api.keygen.sh/v1/accounts/$KEYGEN_ACCOUNT_ID/artifacts/"
 npm config set "//api.keygen.sh/v1/accounts/$KEYGEN_ACCOUNT_ID/artifacts/:_authToken" "$KEYGEN_PRODUCT_TOKEN"
+```
+
+If you'd rather not store your token in your global `.npmrc`, you can also tell npm to
+pull the token from an env variable. For example, this would pull the token from a
+`KEYGEN_TOKEN` env var: (note single quotes)
+
+```bash
+npm config set @demo:registry 'https://api.keygen.sh/v1/accounts/demo/artifacts/'
+npm config set '//api.keygen.sh/v1/accounts/demo/artifacts/:_authToken=${KEYGEN_TOKEN}'
+```
+
+Use a project-specific `.npmrc` file with a variable for your token to securely authenticate
+your CI/CD server. Project-specific `.npmrc` files can be safely checked into version control,
+since the token is not hard coded:
+
+```
+@demo:registry=https://api.keygen.sh/v1/accounts/demo/artifacts/
+//api.keygen.sh/v1/accounts/demo/artifacts/:_authToken=${KEYGEN_TOKEN}
 ```
 
 ## Installing the module
