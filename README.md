@@ -46,7 +46,7 @@ npm config set @demo:registry "https://api.keygen.sh/v1/accounts/$KEYGEN_ACCOUNT
 npm config set "//api.keygen.sh/v1/accounts/$KEYGEN_ACCOUNT_ID/artifacts/:_authToken" "$KEYGEN_PRODUCT_TOKEN"
 ```
 
-#### In CI/CD envs
+#### Avoiding hardcoding tokens in `.npmrc`
 
 If you'd rather not store your token in your global `.npmrc`, you can also tell npm to
 pull the token from an env variable. For example, this would pull the token from a
@@ -57,11 +57,11 @@ npm config set @demo:registry 'https://api.keygen.sh/v1/accounts/demo/artifacts/
 npm config set '//api.keygen.sh/v1/accounts/demo/artifacts/:_authToken=${KEYGEN_TOKEN}'
 ```
 
-#### Project-specific `.npmrc`
+#### Project-specific `.npmrc` for CI/CD
 
 Use a project-specific `.npmrc` file with a variable for your token to securely authenticate
 your CI/CD server. Project-specific `.npmrc` files can be safely checked into version control,
-since the token is not hard coded:
+since the token is not hardcoded:
 
 ```
 @demo:registry=https://api.keygen.sh/v1/accounts/demo/artifacts/
