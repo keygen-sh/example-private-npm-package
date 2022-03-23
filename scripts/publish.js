@@ -3,7 +3,6 @@ const dashify = require('dashify')
 const fetch = require('node-fetch')
 const crypto = require('crypto')
 const fs = require('fs')
-const { info } = require('console')
 
 const {
   PACKAGE_NAME = pkg.name,
@@ -181,6 +180,7 @@ async function publishManifestForPackage() {
     'dist-tags': {
       latest: PACKAGE_VERSION,
     },
+    version: PACKAGE_VERSION,
     versions: Object.assign({}, prev?.versions, {
       [PACKAGE_VERSION]: {
         dist: {
