@@ -7,8 +7,6 @@ const fs = require('fs')
 const {
   PACKAGE_NAME = pkg.name,
   PACKAGE_VERSION = pkg.version,
-  PACKAGE_DEPENDENCIES = pkg.dependencies,
-  PACKAGE_DEVDEPENDENCIES = pkg.devDependencies,
   KEYGEN_ACCOUNT_ID,
   KEYGEN_PRODUCT_ID,
   KEYGEN_PRODUCT_TOKEN,
@@ -178,7 +176,7 @@ async function publishManifestForPackage() {
   // Attempt to merge previous manifest's versions to ensure we maintain history
   const prev = await getManifestForPackage(PACKAGE_NAME)
   const next = {
-    _id: `${PACKAGE_NAME}`,
+    _id: PACKAGE_NAME,
     name: PACKAGE_NAME,
     'dist-tags': {
       latest: PACKAGE_VERSION,
@@ -186,10 +184,10 @@ async function publishManifestForPackage() {
     versions: Object.assign({}, prev?.versions, {
       [PACKAGE_VERSION]: {
         _id: `${PACKAGE_NAME}@${PACKAGE_VERSION}`,
-        name: `${PACKAGE_NAME}`,
+        name: PACKAGE_NAME,
         version: PACKAGE_VERSION,
-        dependencies: PACKAGE_DEPENDENCIES,
-        devDependencies: PACKAGE_DEVDEPENDENCIES,
+        dependencies: pkg.dependencies,
+        devDependencies: pkg.devDependencies,
         dist: {
           tarball: `https://api.keygen.sh/v1/accounts/${KEYGEN_ACCOUNT_ID}/artifacts/${PACKAGE_NAME}/${PACKAGE_VERSION}.tgz`,
           integrity: `sha512-${digest}`,
