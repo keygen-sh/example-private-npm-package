@@ -39,12 +39,15 @@ using the `version` set in `package.json`:
 ## Using the registry
 
 To use Keygen as a private npm registry, we'll need to configure npm to retrieve modules
-under the `@demo` scope from Keygen: (note double quotes)
+under the `@demo` scope from Keygen. You should change `demo` to whatever your account
+identifier is.
 
 ```bash
-npm config set @demo:registry "https://api.keygen.sh/v1/accounts/$KEYGEN_ACCOUNT_ID/artifacts/"
-npm config set "//api.keygen.sh/v1/accounts/$KEYGEN_ACCOUNT_ID/artifacts/:_authToken" "$KEYGEN_PRODUCT_TOKEN"
+npm config set @demo:registry 'https://api.keygen.sh/v1/accounts/demo/artifacts/'
+npm config set "//api.keygen.sh/v1/accounts/demo/artifacts/:_authToken" "$KEYGEN_TOKEN"
 ```
+
+For example, `KEYGEN_TOKEN` could be a license token for an end-user.
 
 #### Avoiding hardcoding tokens in `.npmrc`
 
